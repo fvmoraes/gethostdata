@@ -19,11 +19,13 @@
 > Linux:
 > 
 > ``` ./gethostdata <command> --host <your.host>```
+> 
 ![](/images/gethostdata_use_linux.png)
 
 > Windows
 > 
 > ``` ./gethostdata.exe <command> --host <your.host>```
+> 
 ![](/images/gethostdata_use_windows.png)
 
 ---
