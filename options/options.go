@@ -8,58 +8,48 @@ import (
 	"github.com/urfave/cli"
 )
 
-func SearchIps(host *cli.Context) {
-	getHost := host.String("host")
-	ips, fail := net.LookupIP(getHost)
-	if fail != nil {
-		log.Fatal(fail)
-	}
+func GetInformation(data *cli.Context) {
+	getHost := data.String("host")
+	getCommand := data.Command.Name
 
-	fmt.Printf("\n\nHOST:\n%s\n\nIP's:\n", getHost)
+	fmt.Println(getHost, getCommand)
 
-	for _, ip := range ips {
-		fmt.Println(ip)
-	}
-}
-
-func SearchServers(host *cli.Context) {
-	getHost := host.String("host")
-	nameservers, fail := net.LookupNS(getHost)
-	if fail != nil {
-		log.Fatal(fail)
-	}
-
-	fmt.Printf("\n\nHOST:\n%s\n\nNAMESERVER's:\n", getHost)
-
-	for _, ip := range nameservers {
-		fmt.Println(ip)
-	}
-}
-
-func SearchTxts(host *cli.Context) {
-	getHost := host.String("host")
-	txt, fail := net.LookupTXT(getHost)
-	if fail != nil {
-		log.Fatal(fail)
-	}
-
-	fmt.Printf("\n\nHOST:\n%s\n\nTXT's:\n", getHost)
-
-	for _, ip := range txt {
-		fmt.Println(ip)
+	switch getCommand {
+	case "ip":
+		informations, fail := net.LookupIP(getHost)
+		testFail(fail)
+		dataHeader(getHost)
+		dataSearch(informations)
+	case "nameserver":
+		informations, fail := net.LookupNS(getHost)
+		testFail(fail)
+		dataHeader(getHost)
+		dataSearch(informations)
+	case "txt":
+		informations, fail := net.LookupTXT(getHost)
+		testFail(fail)
+		dataHeader(getHost)
+		dataSearch(informations)
+	case "mx":
+		informations, fail := net.LookupMX(getHost)
+		testFail(fail)
+		dataHeader(getHost)
+		dataSearch(informations)
 	}
 }
 
-func SearchMXs(host *cli.Context) {
-	getHost := host.String("host")
-	mx, fail := net.LookupMX(getHost)
+func testFail(fail error) {
 	if fail != nil {
 		log.Fatal(fail)
 	}
+}
 
-	fmt.Printf("\n\nHOST:\n%s\n\nMX's:\n", getHost)
+func dataHeader(host string) {
+	fmt.Printf("\n\nHOST:\n%s\n\nINFORMATION:\n", host)
+}
 
-	for _, ip := range mx {
-		fmt.Println(ip)
+func dataSearch[GenericType any](informations []GenericType) {
+	for _, information := range informations {
+		fmt.Println(information)
 	}
 }
