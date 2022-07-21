@@ -9,7 +9,7 @@
 ### What was used?
 - [Golang](https://go.dev/)
 - [package cli](https://pkg.go.dev/github.com/urfave/cli@v1.22.9)
-- [package net](https://https://pkg.go.dev/net)
+- [package net](https://pkg.go.dev/net)
 
 ### Basic structure:
 > [package generate](/generate)
