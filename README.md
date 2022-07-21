@@ -12,14 +12,17 @@
 - [package net](https://pkg.go.dev/net)
 
 ### Basic structure:
-> [package generate](/generate)
-> [package options](/options)
+- [package generate](/generate)
+- [package options](/options)
 
 ### Basic usage:
 > Linux:
+> 
 > ``` ./gethostdata <command> --host <your.host>```
 ![](/images/gethostdata_use_linux.png)
+
 > Windows
+> 
 > ``` ./gethostdata.exe <command> --host <your.host>```
 ![](/images/gethostdata_use_windows.png)
 
