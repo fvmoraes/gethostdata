@@ -21,25 +21,25 @@ func Generate() *cli.App {
 			Name:   "ip",
 			Usage:  "IP search",
 			Flags:  flags,
-			Action: options.GetInformation,
+			Action: options.GetHostInfo,
 		},
 		{
 			Name:   "nameserver",
 			Usage:  "Nameserver search",
 			Flags:  flags,
-			Action: options.GetInformation,
+			Action: options.GetHostInfo,
 		},
 		{
 			Name:   "txt",
 			Usage:  "TXT search",
 			Flags:  flags,
-			Action: options.GetInformation,
+			Action: options.GetHostInfo,
 		},
 		{
 			Name:   "mx",
 			Usage:  "MX search",
 			Flags:  flags,
-			Action: options.GetInformation,
+			Action: options.GetHostInfo,
 		},
 	}
 

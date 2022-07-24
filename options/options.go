@@ -8,31 +8,30 @@ import (
 	"github.com/urfave/cli"
 )
 
-func GetInformation(data *cli.Context) {
-	hostName := data.String("host")
-	commandFlag := data.Command.Name
+var hostName string
+var commandFlag string
+
+func GetHostInfo(data *cli.Context) {
+	hostName = data.String("host")
+	commandFlag = data.Command.Name
 
 	switch commandFlag {
 	case "ip":
-		informations, fail := net.LookupIP(hostName)
-		getHostInfo(hostName, informations, fail)
+		printHostInfo(net.LookupIP(hostName))
 	case "nameserver":
-		informations, fail := net.LookupNS(hostName)
-		getHostInfo(hostName, informations, fail)
+		printHostInfo(net.LookupNS(hostName))
 	case "txt":
-		informations, fail := net.LookupTXT(hostName)
-		getHostInfo(hostName, informations, fail)
+		printHostInfo(net.LookupTXT(hostName))
 	case "mx":
-		informations, fail := net.LookupMX(hostName)
-		getHostInfo(hostName, informations, fail)
+		printHostInfo(net.LookupMX(hostName))
 	}
 }
 
-func getHostInfo[GenericType any](host string, informations []GenericType, fail error) {
-	fmt.Printf("\n\nHOST:\n%s\n\nINFORMATION:\n", host)
+func printHostInfo[GenericType any](information []GenericType, fail error) {
+	fmt.Printf("\n\nHOST:\n%s\n\nINFORMATION:\n", hostName)
 
-	for _, information := range informations {
-		fmt.Println(information)
+	for _, it := range information {
+		fmt.Println(it)
 	}
 
 	if fail != nil {
