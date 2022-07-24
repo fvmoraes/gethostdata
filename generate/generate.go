@@ -15,7 +15,7 @@ func Generate() *cli.App {
 		},
 	}
 	generate.Name = "Get Host Data"
-	generate.UsageText = ` ./gethostdata <command> --host <your.host>`
+	generate.UsageText = "./gethostdata(.exe) <command> --host <your.host>"
 	generate.Commands = []cli.Command{
 		{
 			Name:   "ip",

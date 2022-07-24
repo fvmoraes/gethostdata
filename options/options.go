@@ -9,47 +9,33 @@ import (
 )
 
 func GetInformation(data *cli.Context) {
-	getHost := data.String("host")
-	getCommand := data.Command.Name
+	hostName := data.String("host")
+	commandFlag := data.Command.Name
 
-	fmt.Println(getHost, getCommand)
-
-	switch getCommand {
+	switch commandFlag {
 	case "ip":
-		informations, fail := net.LookupIP(getHost)
-		testFail(fail)
-		dataHeader(getHost)
-		dataSearch(informations)
+		informations, fail := net.LookupIP(hostName)
+		getHostInfo(hostName, informations, fail)
 	case "nameserver":
-		informations, fail := net.LookupNS(getHost)
-		testFail(fail)
-		dataHeader(getHost)
-		dataSearch(informations)
+		informations, fail := net.LookupNS(hostName)
+		getHostInfo(hostName, informations, fail)
 	case "txt":
-		informations, fail := net.LookupTXT(getHost)
-		testFail(fail)
-		dataHeader(getHost)
-		dataSearch(informations)
+		informations, fail := net.LookupTXT(hostName)
+		getHostInfo(hostName, informations, fail)
 	case "mx":
-		informations, fail := net.LookupMX(getHost)
-		testFail(fail)
-		dataHeader(getHost)
-		dataSearch(informations)
+		informations, fail := net.LookupMX(hostName)
+		getHostInfo(hostName, informations, fail)
 	}
 }
 
-func testFail(fail error) {
-	if fail != nil {
-		log.Fatal(fail)
-	}
-}
-
-func dataHeader(host string) {
+func getHostInfo[GenericType any](host string, informations []GenericType, fail error) {
 	fmt.Printf("\n\nHOST:\n%s\n\nINFORMATION:\n", host)
-}
 
-func dataSearch[GenericType any](informations []GenericType) {
 	for _, information := range informations {
 		fmt.Println(information)
+	}
+
+	if fail != nil {
+		log.Fatal(fail)
 	}
 }
